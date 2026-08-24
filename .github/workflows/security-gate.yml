@@ -30,12 +30,12 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install Ruff
-        run: python -m pip install ruff
+      - name: Install Pyflakes
+        run: python -m pip install pyflakes
 
       - name: Python Lint
         working-directory: task3/student_api
-        run: ruff check .
+        run: pyflakes .
 
       - name: Secret Scan
         uses: gitleaks/gitleaks-action@v3
