@@ -1,0 +1,10 @@
+title = "Habot DevOps Secret Detection"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "habot-api-key"
+description = "Detect hardcoded API_KEY values"
+regex = '''(?i)API_KEY\s*=\s*["'][^"']+["']'''
+secretGroup = 0

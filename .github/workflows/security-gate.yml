@@ -9,26 +9,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Download repository code
+
+      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Install Terraform
+      # Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # 3. Check Terraform formatting
+      # Check Terraform formatting
       - name: Terraform Format Check
         working-directory: terraform
         run: terraform fmt -check -recursive
 
-      # 4. Validate Terraform configuration
+      # Validate Terraform configuration
       - name: Terraform Validate
         working-directory: terraform
-        run: terraform init -backend=false && terraform validate
+        run: |
+          terraform init -backend=false
+          terraform validate
 
-      # 5. Scan repository for hardcoded secrets
+      # Scan repository for hardcoded secrets
       - name: Secret Scan
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
