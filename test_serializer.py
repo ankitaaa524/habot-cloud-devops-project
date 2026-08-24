@@ -2,11 +2,10 @@ import os
 
 import django
 
-from onboarding.serializers import StudentOnboardingSerializer
-
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "student_api.settings")
 django.setup()
+
+from onboarding.serializers import StudentOnboardingSerializer
 
 
 data = {
@@ -16,7 +15,6 @@ data = {
     "special_support_required": "No",
     "previous_school": "ABC Public School",
 }
-
 
 serializer = StudentOnboardingSerializer(data=data)
 

@@ -4,5 +4,9 @@ from .views import StudentOnboardingView
 
 
 urlpatterns = [
-    path("student-onboarding/", StudentOnboardingView.as_view(), name="student-onboarding"),
+    path(
+        "student-onboarding/",
+        StudentOnboardingView.as_view(),
+        name="student-onboarding",
+    ),
 ]

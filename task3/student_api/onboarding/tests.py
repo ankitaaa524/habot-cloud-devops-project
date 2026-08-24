@@ -1,3 +1,8 @@
-from django.test import TestCase
+from django.contrib import admin
+from django.urls import include, path
 
-# Create your tests here.
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("api/", include("onboarding.urls")),
+]
