@@ -1,1 +1,0 @@
-API_KEY="AIzaSyFakeTestSecret123456789"
