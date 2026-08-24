@@ -9,28 +9,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Check Terraform formatting
       - name: Terraform Format Check
         working-directory: terraform
         run: terraform fmt -check -recursive
 
-      # Validate Terraform configuration
       - name: Terraform Validate
         working-directory: terraform
         run: |
           terraform init -backend=false
           terraform validate
 
-      # Scan repository for hardcoded secrets
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: python -m pip install ruff
+
+      - name: Python Lint
+        working-directory: task3/student_api
+        run: ruff check .
+
       - name: Secret Scan
         uses: gitleaks/gitleaks-action@v3
         env:
